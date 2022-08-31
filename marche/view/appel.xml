@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <record model="ir.ui.view" id="appel_tree_view">
+            <field name="name">Enregistrement des appels d'offre</field>
+            <field name="model">marche.appel</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="structure"/>
+                    <field name="budget"/>
+                    <field name="lieu"/>
+                    <field name="date_parution"/>
+                    <field name="date_limite"/>
+                    <field name="fiche"/>
+                    <field name="dure"/>
+                    <field name="date_depot"/>
+                    <field name="state"/>
+
+                </tree>
+            </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="appel_form_view">
+            <field name="name">Enregistrement des appels d'offre</field>
+            <field name="model">marche.appel</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button id="button_soumis" name="action_soumis" string="Soumis" class="btn-primary" type="object" />
+                        <button id="button_soumetre" name="action_soumetre" string="Soumetre" class="btn-primary" type="object" />
+                        <field name="state" widget="statusbar"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="name"/>
+                                <field name="structure"/>
+                                <field name="budget"/>
+                            </group>
+                            <group>
+                                <field name="lieu"/>
+                                <field name="typ"/>
+                                <field name="date_depot"/>
+
+                            </group>
+                            <group>
+                                <field name="date_parution"/>
+                                <field name="date_limite"/>
+                                <field name="fiche"/>
+                            </group>
+                            <group>
+                                <field name="num_quotidient"/>
+                                <field name="page"/>
+                                <field name="dure"/>
+                                <field name="num_appel"/>
+                            </group>
+                            <group>
+
+                            </group>
+                        </group>
+                        <notebook>
+                            <page>
+                                <field name="dossier"/>
+
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+    </record>
+
+
+   <!-- <record id="library_book_view_search" model="ir.ui.view">
+        <field name="name">Library Book Search</field>
+        <field name="model">library.book</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="author_ids"/>
+                <filter string="Without Authors" name="without_author" domain="[('author_ids','=',False)]"/>
+            </search>
+        </field>
+    </record>
+    -->
+    <record model="ir.actions.act_window" id="appel_action_view">
+        <field name="name">Enregistrement des appels d'offre</field>
+        <field name="res_model">marche.appel</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="GESTION MARCHE" id="enregistre_appel"/>
+    <menuitem name="Données de base" id="marche" parent="enregistre_appel" action="appel_action_view"/>
+    <menuitem name="Marchés" id="marche_m" parent="enregistre_appel" action="appel_action_view"/>
+    <menuitem name="Saisie/Mise à jour des marchés" id="marcheMise" parent="marche_m" action="appel_action_view"/>
+
+
+</odoo>
+
+

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <record model="ir.ui.view" id="dossier_tree_view">
+            <field name="name">dossier à fournir</field>
+            <field name="model">marche.dossier</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="dossier"/>
+                </tree>
+            </field>
+    </record>
+
+    <record model="ir.ui.view" id="dossier_form_view">
+            <field name="name">dossier à fournir</field>
+            <field name="model">marche.dossier</field>
+            <field name="arch" type="xml">
+                <form>
+                    <field name="dossier"/>
+                </form>
+            </field>
+    </record>
+
+
+
+    <record model="ir.actions.act_window" id="dossier_action_view">
+        <field name="name">dossier à fournir</field>
+        <field name="res_model">marche.dossier</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Saisie/Mise à jour des pièces à fournir" id="doc" parent="marche" action="dossier_action_view"/>
+
+
+</odoo>

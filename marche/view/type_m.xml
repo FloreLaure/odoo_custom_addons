@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <record model="ir.ui.view" id="type_m_tree_view">
+            <field name="name">Type du marché</field>
+            <field name="model">marche.type_m</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="descriptions"/>
+
+                </tree>
+            </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="type_m_form_view">
+            <field name="name">Type du marché</field>
+            <field name="model">marche.type_m</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+
+                            <field name="name"/>
+                            <field name="descriptions"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+    </record>
+
+
+    <record model="ir.actions.act_window" id="type_m_action_view">
+            <field name="name">Type du marché</field>
+            <field name="res_model">marche.type_m</field>
+            <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Saisie/Mise à jour des types de marché"  id="typ_appel" parent="marche" action="type_m_action_view"/>
+</odoo>

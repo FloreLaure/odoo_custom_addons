@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+ 
+    <record model="ir.ui.view" id="ListeMarcheSoumisLine_tree_view">
+            <field name="name">Marche soumis line</field>
+            <field name="model">marche.ListeMarcheSoumisLine</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="intitule"/>
+                    <field name="structure_id"/>
+                    <field name="liste_id"/>
+                    <field name="dte_depot"/>
+                    <field name="type_id"/>
+
+                </tree>
+            </field>
+    </record>
+
+    <record model="ir.ui.view" id="ListeMarcheSoumisLine_form_view">
+            <field name="name">Marche soumis line</field>
+            <field name="model">marche.ListeMarcheSoumisLine</field>
+            <field name="arch" type="xml">
+                <form>
+                    <field name="intitule"/>
+                    <field name="structure_id"/>
+                    <field name="liste_id"/>
+                    <field name="dte_depot"/>
+                    <field name="type_id"/>
+
+                </form>
+            </field>
+    </record>
+
+
+
+    <record model="ir.actions.act_window" id="ListeMarcheSoumisLine_action_view">
+        <field name="name">Marche soumis line</field>
+        <field name="res_model">marche.ListeMarcheSoumisLine</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="ListeMarcheSoumisLine" id="synthes" parent="synthese" action="ListeMarcheSoumisLine_action_view"/>
+
+
+
+</odoo>
+
+

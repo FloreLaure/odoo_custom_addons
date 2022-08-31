@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <record model="ir.ui.view" id="structure_tree_view">
+            <field name="name">Structure demandeuse</field>
+            <field name="model">marche.structure</field>
+            <field name="arch" type="xml">
+                <tree>
+
+                    <field name="phone"/>
+                    <field name="mail"/>
+                    <field name="name"/>
+
+                </tree>
+            </field>
+    </record>
+
+
+    <record model="ir.ui.view" id="structure_form_view">
+            <field name="name">Structure demandeuse</field>
+            <field name="model">marche.structure</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="phone"/>
+                            <field name="mail"/>
+                            <field name="name"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+    </record>
+
+
+    <record model="ir.actions.act_window" id="structure_action_view">
+            <field name="name">Structure demandeuse</field>
+            <field name="res_model">marche.structure</field>
+            <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Saisie/Mise à jour des structures" id="structure_appel" parent="marche" action="structure_action_view"/>
+    
+</odoo>

@@ -1,0 +1,9 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+accessappel,accessappel,model_marche_appel,,1,1,1,1
+accessstructure,accessstructure,model_marche_structure,,1,1,1,1
+accesstype_m,accesstype_m,model_marche_type_m,,1,1,1,1
+accessdossier,accessdossier,model_marche_dossier,,1,1,1,1
+accessListeMarcheSoumis,accessListeMarcheSoumis,model_marche_ListeMarcheSoumis,,1,0,0,0
+accessListeMarcheSoumisLine,accessListeMarcheSoumisLine,model_marche_ListeMarcheSoumisLine,,1,0,0,0
+
+
