@@ -21,8 +21,9 @@ class appel(models.Model):
     typ = fields.Many2one("marche.type_m", string="Type du marché")
     num_appel = fields.Integer(string="Numéro d'appel d'offre")
     fiche = fields.Binary(string="Quotidient", )
-    dossier = fields.Many2many("marche.dossier", string="dossier à fournir", required =True)
-    state = fields.Selection([('soumis', 'Soumis'),('soumetre','Soumetre')],string="Etat")
+    dossier = fields.Many2many("marche.dossier", string="Dossier à fournir", required =True)
+    concuren=fields.Many2many("marche.concurence", string="Concurrents")
+    state = fields.Selection([('soumis', 'Soumis'),('soumetre','Soumetre'),('nouveau','Nouveau')], default="nouveau", string="Etat")
 
     def action_soumis(self):
         self.state = 'soumis'
@@ -30,6 +31,8 @@ class appel(models.Model):
     def action_soumetre(self):
         self.state = 'soumetre'
 
+    def action_nouveau(self):
+        self.state = 'nouveau'
 
 
 class dossier(models.Model):
@@ -37,7 +40,6 @@ class dossier(models.Model):
     _description = "dossier à fournir"
 
     dossier = fields.Char()
-
 
 
 class structure(models.Model):
@@ -49,6 +51,14 @@ class structure(models.Model):
     mail = fields.Char(string="E-Mail")
 
 
+class concurence(models.Model):
+    _name="marche.concurence"
+    _description="Concurrents"
+
+    name=fields.Char(string="Nom du concurent")
+    dossier_concurent=fields.Many2one("marche.dossier",string="Dossiers fournis par le concurent")
+    budget_concurent=fields.Integer(string="Budget proposé")
+
 
 class type_m(models.Model):
     _name = "marche.type_m"
@@ -58,22 +68,20 @@ class type_m(models.Model):
     descriptions = fields.Text(string="Description du marché")
 
 
-
 class ListeMarcheSoumis(models.TransientModel):
-    _name = "marche.ListeMarcheSoumis"
+    _name = "liste.marche.soumis"
+    _description = "Soumis marche"
 
-    dte_debut = fields.Date(string= "Date de début", required=True)
+    dte_debut = fields.Date(string="Date de début", required=True)
     dte_fin = fields.Date(string="Date de fin", required=True)
-    liste_ids = fields.One2many("marche.ListeMarcheSoumisLine", "liste_id",readonly=True)
+    liste_ids = fields.One2many("liste.marche.soumis.line", "liste_id",readonly=True)
 
-
-    
     def afficherListe(self):
 
         debut = self.dte_debut
         fin = self.dte_fin
 
-           
+        for lis in self:
             lis.env.cr.execute("""SELECT name, structure, typ, date_depot from marche_appel 
                 where state = 'soumis' and date_depot between %s and %s """, (debut, fin)) 
             rows = lis.env.cr.dictfetchall()  
@@ -81,22 +89,22 @@ class ListeMarcheSoumis(models.TransientModel):
 
             lis.liste_ids.unlink()
             for line in rows:
-                result.append((0,0 {'structure_id' : structure, 'intitule': name, 'type_id': typ, 'dte_depot' : date_depot}))
+                result.append(({'structure_id' : structure, 'intitule': name, 'type_id': typ, 'dte_depot' : date_depot}))
             self.liste_ids = result
 
 
-
-
 class ListeMarcheSoumisLine(models.TransientModel):
-    _name = "marche.ListeMarcheSoumisLine"
+    _name = "liste.marche.soumis.line"
+    _description = "Soumis line"
 
-
-
-    liste_id = fields.Many2one("marche.ListeMarcheSoumis",ondelete='cascade')
+    liste_id = fields.Many2one("liste.marche.soumis", ondelete="cascade")
     structure_id = fields.Many2one("marche.structure", string="Structure")
-    intitule = fields.Char("marche.appel", string="Intitulé")
-    type_id = fields.Char(string="Type de marché")
-    dte_depot = fields.Date(string="Date de dépôt")
+    intitule = fields.Many2one("marche.appel", string="Intitulé")
+    type_id = fields.Many2one("marche.appel",string="Type de marché")
+    dte_depot = fields.Many2one("marche.appel",string="Date de dépôt")
+
+
+
 
 
 

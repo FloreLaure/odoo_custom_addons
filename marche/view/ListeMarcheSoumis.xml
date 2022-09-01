@@ -1,39 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <odoo>
- 
-    <record model="ir.ui.view" id="ListeMarcheSoumis_tree_view">
-            <field name="name">Marche soumis</field>
-            <field name="model">marche.ListeMarcheSoumis</field>
-            <field name="arch" type="xml">
-                <tree>
-                    <field name="dte_debut"/>
-                    <field name="dte_fin"/>
-                    <field name="liste_ids"/>
-
-                </tree>
-            </field>
-    </record>
 
     <record model="ir.ui.view" id="ListeMarcheSoumis_form_view">
             <field name="name">Marche soumis</field>
-            <field name="model">marche.ListeMarcheSoumis</field>
+            <field name="model">liste.marche.soumis</field>
             <field name="arch" type="xml">
                 <form>
-                    <field name="dte_debut"/>
-                    <field name="dte_fin"/>
-                    <field name="liste_ids"/>
-
+                	<sheet>
+                		<group>
+		                    <field name="dte_debut"/>
+		                    <field name="dte_fin"/>
+		                </group>
+		                <group>
+		                	<field name="liste_ids"/>
+		                </group>
+	                </sheet>
                 </form>
             </field>
     </record>
 
-
-
     <record model="ir.actions.act_window" id="ListeMarcheSoumis_action_view">
         <field name="name">Marche soumis</field>
-        <field name="res_model">marche.ListeMarcheSoumis</field>
-        <field name="view_mode">tree,form</field>
+        <field name="res_model">liste.marche.soumis</field>
+        <field name="view_mode">form</field>
     </record>
 
     <menuitem name="Synthèse" id="synthese" parent="enregistre_appel" action="ListeMarcheSoumis_action_view"/>
@@ -42,5 +32,3 @@
 
 
 </odoo>
-
-

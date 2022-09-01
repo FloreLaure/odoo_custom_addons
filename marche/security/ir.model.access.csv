@@ -3,7 +3,11 @@ accessappel,accessappel,model_marche_appel,,1,1,1,1
 accessstructure,accessstructure,model_marche_structure,,1,1,1,1
 accesstype_m,accesstype_m,model_marche_type_m,,1,1,1,1
 accessdossier,accessdossier,model_marche_dossier,,1,1,1,1
-accessListeMarcheSoumis,accessListeMarcheSoumis,model_marche_ListeMarcheSoumis,,1,0,0,0
-accessListeMarcheSoumisLine,accessListeMarcheSoumisLine,model_marche_ListeMarcheSoumisLine,,1,0,0,0
+accessListeMarcheSoumis,accessListeMarcheSoumis,model_liste_marche_soumis,,1,1,1,1
+accessListeMarcheSoumisLine,accessListeMarcheSoumisLine,model_liste_marche_soumis_line,,1,1,1,1
+accessconcurence,accessconcurence,model_marche_concurence,,1,1,1,1
+
+
+
 
 

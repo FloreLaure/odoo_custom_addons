@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <record model="ir.ui.view" id="concurence_tree_view">
+            <field name="name">concurence</field>
+            <field name="model">marche.concurence</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="dossier_concurent"/>
+                    <field name="budget_concurent"/>
+
+                </tree>
+            </field>
+    </record>
+
+    <record model="ir.ui.view" id="concurence_form_view">
+            <field name="name">concurence</field>
+            <field name="model">marche.concurence</field>
+            <field name="arch" type="xml">
+                <form>
+                	<sheet>
+                		<group>
+		                    <field name="name"/>
+		                    <field name="dossier_concurent"/>
+		                    <field name="budget_concurent"/>
+		                </group>
+		            </sheet>
+                </form>
+            </field>
+    </record>
+
+
+
+    <record model="ir.actions.act_window" id="concurence_action_view">
+        <field name="name">concurence</field>
+        <field name="res_model">marche.concurence</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+    <menuitem name="Saisie/Mise à jour des concurrents" id="concuren" parent="marche" action="concurence_action_view"/>
+
+</odoo>

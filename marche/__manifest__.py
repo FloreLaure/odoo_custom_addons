@@ -14,9 +14,9 @@
         'view/structure.xml',
         'view/dossier.xml',
         'view/type_m.xml',
+        'view/listeSoumisLine.xml',
         'view/ListeMarcheSoumis.xml',
-        'view/ListeMarcheSoumisLine.xml',
-
+        'view/concurence.xml',
 
     ],
     
@@ -24,3 +24,5 @@
     'application': True,
     
 }
+
+

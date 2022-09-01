@@ -13,7 +13,7 @@
                     <field name="lieu"/>
                     <field name="date_parution"/>
                     <field name="date_limite"/>
-                    <field name="fiche"/>
+                    <field name="concuren"/>
                     <field name="dure"/>
                     <field name="date_depot"/>
                     <field name="state"/>
@@ -31,6 +31,7 @@
                     <header>
                         <button id="button_soumis" name="action_soumis" string="Soumis" class="btn-primary" type="object" />
                         <button id="button_soumetre" name="action_soumetre" string="Soumetre" class="btn-primary" type="object" />
+                        <button id="button_nouveau" name="action_nouveau" string="Nouveau" class="btn-primary" type="object" />
                         <field name="state" widget="statusbar"/>
                     </header>
                     <sheet>
@@ -64,7 +65,11 @@
                         <notebook>
                             <page>
                                 <field name="dossier"/>
-
+                            </page>
+                        </notebook>
+                        <notebook>
+                            <page>
+                                <field name="concuren"/>
                             </page>
                         </notebook>
                     </sheet>
