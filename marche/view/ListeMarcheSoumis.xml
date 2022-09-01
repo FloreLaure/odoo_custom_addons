@@ -9,11 +9,18 @@
                 <form>
                 	<sheet>
                 		<group>
-		                    <field name="dte_debut"/>
-		                    <field name="dte_fin"/>
+		                    <field name="dte_debut" style="width:50%"/>
+		                    <field name="dte_fin" style="width:50%"/>
 		                </group>
 		                <group>
-		                	<field name="liste_ids"/>
+		                	<field name="liste_ids" force_save="1">
+                                <tree>
+                                    <field name="structure_id"/>
+                                    <field name="intitule"/>
+                                    <field name="type_id"/>
+                                    <field name="dte_depot"/>
+                                </tree>         
+                            </field>
 		                </group>
 	                </sheet>
                 </form>

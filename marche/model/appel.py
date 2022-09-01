@@ -23,17 +23,17 @@ class appel(models.Model):
     fiche = fields.Binary(string="Quotidient", )
     dossier = fields.Many2many("marche.dossier", string="Dossier à fournir", required =True)
     concuren=fields.Many2many("marche.concurence", string="Concurrents")
-    state = fields.Selection([('soumis', 'Soumis'),('soumetre','Soumetre'),('nouveau','Nouveau')], default="nouveau", string="Etat")
+    state = fields.Selection([('N','Nouveau'),('S', 'Soumis')], default="N", string="Etat")
 
     def action_soumis(self):
-        self.state = 'soumis'
+        self.state = 'S'
 
-    def action_soumetre(self):
-        self.state = 'soumetre'
 
     def action_nouveau(self):
-        self.state = 'nouveau'
+        self.state = 'N'
 
+
+## classe pour l'enregistrement des dossiers à fournir ##
 
 class dossier(models.Model):
     _name = "marche.dossier"
@@ -41,6 +41,8 @@ class dossier(models.Model):
 
     dossier = fields.Char()
 
+
+## classe pour l'enregistrement des structure demandeuses ##
 
 class structure(models.Model):
     _name = "marche.structure"
@@ -51,6 +53,8 @@ class structure(models.Model):
     mail = fields.Char(string="E-Mail")
 
 
+## classe pour l'enregistrement des informations sur les concurents ##
+
 class concurence(models.Model):
     _name="marche.concurence"
     _description="Concurrents"
@@ -59,6 +63,8 @@ class concurence(models.Model):
     dossier_concurent=fields.Many2one("marche.dossier",string="Dossiers fournis par le concurent")
     budget_concurent=fields.Integer(string="Budget proposé")
 
+ 
+## classe pour l'enregistrement des types de marché ##
 
 class type_m(models.Model):
     _name = "marche.type_m"
@@ -67,6 +73,8 @@ class type_m(models.Model):
     name = fields.Char(string="Type du marché", required =True)
     descriptions = fields.Text(string="Description du marché")
 
+
+## classe pour le resumé des marchés soumis pendant une periode donnée:dte_debut dte_fin ##
 
 class ListeMarcheSoumis(models.TransientModel):
     _name = "liste.marche.soumis"
@@ -89,7 +97,7 @@ class ListeMarcheSoumis(models.TransientModel):
 
             lis.liste_ids.unlink()
             for line in rows:
-                result.append(({'structure_id' : structure, 'intitule': name, 'type_id': typ, 'dte_depot' : date_depot}))
+                result.append((0,0, {'structure_id' : line['structure'], 'intitule': line['name'], 'type_id': line['typ'], 'dte_depot' : line['date_depot']}))
             self.liste_ids = result
 
 
@@ -99,9 +107,9 @@ class ListeMarcheSoumisLine(models.TransientModel):
 
     liste_id = fields.Many2one("liste.marche.soumis", ondelete="cascade")
     structure_id = fields.Many2one("marche.structure", string="Structure")
-    intitule = fields.Many2one("marche.appel", string="Intitulé")
-    type_id = fields.Many2one("marche.appel",string="Type de marché")
-    dte_depot = fields.Many2one("marche.appel",string="Date de dépôt")
+    intitule = fields.Text(string="Intitulé")
+    type_id = fields.Many2one("marche.type_m",string="Type de marché")
+    dte_depot = fields.Date(string="Date de dépôt")
 
 
 

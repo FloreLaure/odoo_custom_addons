@@ -24,14 +24,12 @@
 
 
     <record model="ir.ui.view" id="appel_form_view">
-            <field name="name">Enregistrement des appels d'offre</field>
+            <field name="name">Enregistrement d'un appel d'offre</field>
             <field name="model">marche.appel</field>
             <field name="arch" type="xml">
                 <form>
                     <header>
-                        <button id="button_soumis" name="action_soumis" string="Soumis" class="btn-primary" type="object" />
-                        <button id="button_soumetre" name="action_soumetre" string="Soumetre" class="btn-primary" type="object" />
-                        <button id="button_nouveau" name="action_nouveau" string="Nouveau" class="btn-primary" type="object" />
+                        <button id="button_soumis" name="action_soumis" string="Soumettre" attrs ="{'invisible':[('state', 'in', ['S'])]}" class="btn-primary" type="object"/>
                         <field name="state" widget="statusbar"/>
                     </header>
                     <sheet>
@@ -58,17 +56,11 @@
                                 <field name="dure"/>
                                 <field name="num_appel"/>
                             </group>
-                            <group>
-
-                            </group>
+                            
                         </group>
                         <notebook>
                             <page>
                                 <field name="dossier"/>
-                            </page>
-                        </notebook>
-                        <notebook>
-                            <page>
                                 <field name="concuren"/>
                             </page>
                         </notebook>
