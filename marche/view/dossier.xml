@@ -17,10 +17,15 @@
             <field name="model">marche.dossier</field>
             <field name="arch" type="xml">
                 <form>
-                    <field name="dossier"/>
+                    <sheet>
+                        <group>
+                            <field name="dossier" style="width:50%"/>
+                        </group>
+                    </sheet>
                 </form>
             </field>
     </record>
+
 
 
 

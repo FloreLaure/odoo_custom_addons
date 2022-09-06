@@ -7,10 +7,9 @@
             <field name="model">marche.structure</field>
             <field name="arch" type="xml">
                 <tree>
-
+                    <field name="name"/>
                     <field name="phone"/>
                     <field name="mail"/>
-                    <field name="name"/>
 
                 </tree>
             </field>
@@ -24,14 +23,30 @@
                 <form>
                     <sheet>
                         <group>
-                            <field name="phone"/>
-                            <field name="mail"/>
-                            <field name="name"/>
+                            <field name="name" style="width:50%"/>
+                        </group>
+                        <group>
+                            <field name="phone" style="width:50%"/>
+                            <field name="mail" style="width:50%"/>
                         </group>
                     </sheet>
                 </form>
             </field>
     </record>
+
+
+    <record id="appel_view_search" model="ir.ui.view">
+        <field name="name">Rechercher une structure</field>
+        <field name="model">marche.structure</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="mail"/>
+                <filter string="Without Authors" name="without_mail" domain="[('mail','=',False)]"/>
+            </search>
+        </field>
+    </record>
+
 
 
     <record model="ir.actions.act_window" id="structure_action_view">

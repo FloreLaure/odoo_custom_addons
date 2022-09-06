@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <odoo>
-
     <record model="ir.ui.view" id="ListeMarcheSoumis_form_view">
             <field name="name">Marche soumis</field>
             <field name="model">liste.marche.soumis</field>
@@ -13,7 +12,7 @@
 		                    <field name="dte_fin" style="width:50%"/>
 		                </group>
 		                <group>
-		                	<field name="liste_ids" force_save="1">
+		                	<field name="liste_ids" force_save="1" id="tree_afficherListe">
                                 <tree>
                                     <field name="structure_id"/>
                                     <field name="intitule"/>
@@ -30,7 +29,7 @@
     <record model="ir.actions.act_window" id="ListeMarcheSoumis_action_view">
         <field name="name">Marche soumis</field>
         <field name="res_model">liste.marche.soumis</field>
-        <field name="view_mode">form</field>
+        <field name="view_mode">form,tree</field>
     </record>
 
     <menuitem name="Synthèse" id="synthese" parent="enregistre_appel" action="ListeMarcheSoumis_action_view"/>

@@ -10,7 +10,7 @@
                     <field name="name"/>
                     <field name="dossier_concurent"/>
                     <field name="budget_concurent"/>
-
+                    <field name="rang"/>
                 </tree>
             </field>
     </record>
@@ -22,14 +22,20 @@
                 <form>
                 	<sheet>
                 		<group>
-		                    <field name="name"/>
-		                    <field name="dossier_concurent"/>
-		                    <field name="budget_concurent"/>
+		                    <field name="name" style="width:50%"/>
+		                    <field name="budget_concurent" style="width:50%"/>
+                            <field name="rang"/>
 		                </group>
+                        <group>
+                            <field name="dossier_concurent"/>
+                        </group>
 		            </sheet>
                 </form>
             </field>
     </record>
+
+
+    
 
 
 

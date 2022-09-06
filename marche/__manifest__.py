@@ -10,6 +10,7 @@
     'depends' : ['base_setup', ],
     'data': [
         'security/ir.model.access.csv',
+        'security/security.xml',
         'view/appel.xml',
         'view/structure.xml',
         'view/dossier.xml',

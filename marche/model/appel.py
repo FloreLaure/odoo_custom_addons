@@ -39,7 +39,7 @@ class dossier(models.Model):
     _name = "marche.dossier"
     _description = "dossier à fournir"
 
-    dossier = fields.Char()
+    dossier = fields.Char(string="Pièces à fournir")
 
 
 ## classe pour l'enregistrement des structure demandeuses ##
@@ -60,8 +60,9 @@ class concurence(models.Model):
     _description="Concurrents"
 
     name=fields.Char(string="Nom du concurent")
-    dossier_concurent=fields.Many2one("marche.dossier",string="Dossiers fournis par le concurent")
+    dossier_concurent=fields.Text(string="Dossiers fournis par le concurent")
     budget_concurent=fields.Integer(string="Budget proposé")
+    rang=fields.Integer(string="Rang")
 
  
 ## classe pour l'enregistrement des types de marché ##

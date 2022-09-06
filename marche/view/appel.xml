@@ -37,30 +37,32 @@
                             <group>
                                 <field name="name"/>
                                 <field name="structure"/>
-                                <field name="budget"/>
+                            </group>
+                            <group>
+                                <field name="date_parution" style="width:50%"/>
+                                <field name="date_limite" style="width:50%"/>
+                                <field name="date_depot" style="width:50%"/>
+                                <field name="budget" style="width:50%"/>
+
                             </group>
                             <group>
                                 <field name="lieu"/>
                                 <field name="typ"/>
-                                <field name="date_depot"/>
-
-                            </group>
-                            <group>
-                                <field name="date_parution"/>
-                                <field name="date_limite"/>
                                 <field name="fiche"/>
                             </group>
                             <group>
-                                <field name="num_quotidient"/>
-                                <field name="page"/>
-                                <field name="dure"/>
-                                <field name="num_appel"/>
+                                <field name="num_quotidient" style="width:50%"/>
+                                <field name="page" style="width:50%"/>
+                                <field name="dure" style="width:50%"/>
+                                <field name="num_appel" style="width:50%"/>
                             </group>
                             
                         </group>
                         <notebook>
-                            <page>
-                                <field name="dossier"/>
+                            <page string="Pièces à fournir">
+                                <field name="dossier"/>               
+                            </page>
+                            <page string="Concurents">
                                 <field name="concuren"/>
                             </page>
                         </notebook>
@@ -68,6 +70,22 @@
                 </form>
             </field>
     </record>
+
+
+    <record id="appel_view_search" model="ir.ui.view">
+        <field name="name">Rechercher un marché</field>
+        <field name="model">marche.appel</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="structure"/>
+                <filter string="Without Authors" name="without_structure" domain="[('structure','=',False)]"/>
+            </search>
+        </field>
+    </record>
+
+
+
 
 
    <!-- <record id="library_book_view_search" model="ir.ui.view">

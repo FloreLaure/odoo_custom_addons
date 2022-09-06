@@ -22,14 +22,26 @@
                 <form>
                     <sheet>
                         <group>
-
-                            <field name="name"/>
-                            <field name="descriptions"/>
+                            <field name="name" style="width:50%"/>
+                            <field name="descriptions" style="width:50%"/>
                         </group>
                     </sheet>
                 </form>
             </field>
     </record>
+
+    <record id="appel_view_search" model="ir.ui.view">
+        <field name="name">Rechercher d'un type de marché</field>
+        <field name="model">marche.type_m</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="descriptions"/>
+                <filter string="Without Authors" name="without_descriptions" domain="[('descriptions','=',False)]"/>
+            </search>
+        </field>
+    </record>
+
 
 
     <record model="ir.actions.act_window" id="type_m_action_view">
