@@ -14,4 +14,9 @@
             <field name="category_id" ref="marche.module_category_management"/>
     </record>
 
+    <record id="group_category_manage" model="res.groups">
+            <field name="name">groupe manage</field>
+            <field name="category_id" ref="marche.module_category_management"/>
+    </record>
+
 </odoo>

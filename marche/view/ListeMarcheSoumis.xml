@@ -6,13 +6,16 @@
             <field name="model">liste.marche.soumis</field>
             <field name="arch" type="xml">
                 <form>
+                    <header>
+                        <button id="button_afficherListe" name="afficherListe" string="Afficher la liste" class="btn-primary" type="object"/>
+                    </header>
                 	<sheet>
                 		<group>
 		                    <field name="dte_debut" style="width:50%"/>
 		                    <field name="dte_fin" style="width:50%"/>
 		                </group>
 		                <group>
-		                	<field name="liste_ids" force_save="1" id="tree_afficherListe">
+		                	<field name="liste_ids" force_save="1" nolabel='1'>
                                 <tree>
                                     <field name="structure_id"/>
                                     <field name="intitule"/>

@@ -29,9 +29,15 @@
             <field name="arch" type="xml">
                 <form>
                     <header>
-                        <button id="button_soumis" name="action_soumis" string="Soumettre" attrs ="{'invisible':[('state', 'in', ['S'])]}" class="btn-primary" type="object"/>
+                        <button id="button_soumis" name="action_soumis" string="Soumettre" attrs ="{'invisible':[('state', 'in', ['S'])]}" class="btn-primary" type="object" groups="marche.group_category_manager"/>
+
+                        <button id="button_obtenu" name="action_obtenu" string="Obtenu" attrs ="{'invisible':[('state', 'in', ['O','N'])]}" class="btn-primary" type="object"/>
+
+                        <button id="button_perdu" name="action_perdu" string="Perdu" attrs ="{'invisible':[('state', 'in', ['P','N'])]}" class="btn-primary" type="object"/>
+
                         <field name="state" widget="statusbar"/>
                     </header>
+
                     <sheet>
                         <group>
                             <group>
@@ -55,14 +61,14 @@
                                 <field name="page" style="width:50%"/>
                                 <field name="dure" style="width:50%"/>
                                 <field name="num_appel" style="width:50%"/>
-                            </group>
+                            </group>    
                             
                         </group>
                         <notebook>
                             <page string="Pièces à fournir">
                                 <field name="dossier"/>               
                             </page>
-                            <page string="Concurents">
+                            <page string="Concurents" attrs ="{'invisible':[('state', 'in', ['N'])]}">
                                 <field name="concuren"/>
                             </page>
                         </notebook>

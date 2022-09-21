@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+    <record model="ir.ui.view" id="ListeMarcheObtenue_form_view">
+            <field name="name">Marche obtenue</field>
+            <field name="model">liste.marche.obtenue</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                        <button id="button_ObtenueListe" name="ObtenueListe" string="Afficher la liste" class="btn-primary" type="object"/>
+                    </header>
+                    <sheet>
+                        <group>
+                            <field name="dte_debut" style="width:50%"/>
+                            <field name="dte_fin" style="width:50%"/>
+                        </group>
+                        <group>
+                            <field name="obtenue_ids" force_save="1" nolabel='1'>
+                                <tree>
+                                    <field name="structure_id"/>
+                                    <field name="intitule"/>
+                                    <field name="type_id"/>
+                                    <field name="budget"/>
+                                    <field name="dure"/>
+                                </tree>         
+                            </field>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="ListeMarcheObtenue_action_view">
+        <field name="name">Marche obtenue</field>
+        <field name="res_model">liste.marche.obtenue</field>
+        <field name="view_mode">form,tree</field>
+    </record>
+
+    <menuitem name="Liste des marchés obtenues" id="liste_obtenue" parent="synthese" action="ListeMarcheObtenue_action_view"/>
+
+</odoo>

@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+
+    <record model="ir.actions.report" id="report_soumis">
+        <field name="name">Imprimer la liste</field>
+        <field name="model">liste.marche.soumis</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">marche.liste_marche_soumis</field>
+        <field name="report_file">marche.liste_marche_soumis</field>
+        <field name="binding_model_id" ref="model_liste_marche_soumis"/>
+        <field name="binding_type">report</field>
+    </record>
+
+
+    <template id="liste_marche_soumis">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.internal_layout">
+                    <t t-foreach="o.liste_ids" t-as="l">
+                        <span t-field='l.structure_id.name'/>
+                        <span t-field='l.intitule'/>
+
+                    </t>
+
+                </t>
+            </t>
+        </t>
+    </template>
+
+
+
+
+
+<record model="ir.actions.report" id="report_obtenue">
+        <field name="name">Imprimer la liste</field>
+        <field name="model">liste.marche.obtenue</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">marche.liste_marche_obtenue</field>
+        <field name="report_file">marche.liste_marche_obtenue</field>
+        <field name="binding_model_id" ref="model_liste_marche_obtenue"/>
+        <field name="binding_type">report</field>
+</record>
+
+
+    <template id="liste_marche_obtenue">
+        <t t-call="web.html_container">
+            <t t-foreach="docs" t-as="o">
+                <t t-call="web.internal_layout">
+                    <div class="page"> 
+                        <head>                     
+                   <style type="text/css">
+                        
+                        td, span {
+                            font-family : times new roman;
+                        }
+                        
+                        th
+                           {
+                            font-style : italic;
+                            font-family : times new roman;
+                        }
+
+                        table {
+                            border-collapse : collapse;
+                        }
+
+                        td {
+                            padding : 6px;
+                        }
+                        
+                                
+                        h3,h1 {
+                            text-align : center;
+                            color : green;
+                            border : 2px solid;
+                            font-family : times new roman;
+                        }
+                        
+                        h6{
+                            font-family : times new roman;
+                        }
+                        
+                        
+                        
+                        .g {
+                            font-family : times new roman;
+                        }
+                        
+                            .vertical-line{
+                        border-left: 2px solid #000;
+                        border-color:  #09500B;
+                        display: inline-block;
+                        height: 130px;
+                        width: 50%;
+                        margin: 0 20px;
+                                }
+                                
+                        #hori {
+                                height: 1px;
+                                border: 1px solid;
+                                border-color:  #09500B;
+                        }
+                        
+                        #corps {
+                            background-image : url("/sigepe_compta/static/src/rtb1.png");
+                            background-repeat : no-repeat;
+                            background-position : center;
+                        }
+                        
+                        #wrapper_1 {
+                    
+                            float: left;
+                        }
+                        #wrapper_1:after {
+                             content: "";
+                             background-color: #000;
+                             position: relative;
+                             width: 5px;
+                             height: 100px;
+                             top: 10px;
+                             left: 50%;
+                             display: block;
+                        }
+                        #wrapper_2 {
+                             float: right;
+                        }
+                                
+                        
+                    </style>
+               </head>
+               <body>
+                 <div>
+                       <div  style="float:left">
+                        </div>
+
+                </div>
+                 
+
+                 
+                 
+                
+                   </body>
+            </div>
+        </t>
+    </t>
+</t>
+</template>
+
+
+
+</odoo>

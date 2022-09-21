@@ -11,12 +11,14 @@
     'data': [
         'security/ir.model.access.csv',
         'security/security.xml',
+        'report/report.xml',
         'view/appel.xml',
         'view/structure.xml',
         'view/dossier.xml',
         'view/type_m.xml',
         'view/listeSoumisLine.xml',
         'view/ListeMarcheSoumis.xml',
+        'view/listeObtenue.xml',
         'view/concurence.xml',
 
     ],
