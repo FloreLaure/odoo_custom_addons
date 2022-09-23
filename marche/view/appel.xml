@@ -13,9 +13,7 @@
                     <field name="lieu"/>
                     <field name="date_parution"/>
                     <field name="date_limite"/>
-                    <field name="concuren"/>
                     <field name="dure"/>
-                    <field name="date_depot"/>
                     <field name="state"/>
 
                 </tree>
@@ -31,9 +29,9 @@
                     <header>
                         <button id="button_soumis" name="action_soumis" string="Soumettre" attrs ="{'invisible':[('state', 'in', ['S'])]}" class="btn-primary" type="object" groups="marche.group_category_manager"/>
 
-                        <button id="button_obtenu" name="action_obtenu" string="Obtenu" attrs ="{'invisible':[('state', 'in', ['O','N'])]}" class="btn-primary" type="object"/>
+                        <button id="button_obtenu" name="action_obtenu" string="Obtenu" attrs ="{'invisible':[('state', 'in', ['O','S'])]}" class="btn-primary" type="object"/>
 
-                        <button id="button_perdu" name="action_perdu" string="Perdu" attrs ="{'invisible':[('state', 'in', ['P','N'])]}" class="btn-primary" type="object"/>
+                        <button id="button_perdu" name="action_perdu" string="Perdu" attrs ="{'invisible':[('state', 'in', ['P','S'])]}" class="btn-primary" type="object"/>
 
                         <field name="state" widget="statusbar"/>
                     </header>
@@ -47,9 +45,7 @@
                             <group>
                                 <field name="date_parution" style="width:50%"/>
                                 <field name="date_limite" style="width:50%"/>
-                                <field name="date_depot" style="width:50%"/>
                                 <field name="budget" style="width:50%"/>
-
                             </group>
                             <group>
                                 <field name="lieu"/>
@@ -61,6 +57,12 @@
                                 <field name="page" style="width:50%"/>
                                 <field name="dure" style="width:50%"/>
                                 <field name="num_appel" style="width:50%"/>
+                            </group> 
+
+                             <group attrs ="{'invisible':[('state', 'in', ['N','S','P'])],'required':[('state','in','O')]}">
+                                <field name="orientation"/>
+                                <field name="periode"/>
+                                <field name="note"/>
                             </group>    
                             
                         </group>
@@ -71,6 +73,10 @@
                             <page string="Concurents" attrs ="{'invisible':[('state', 'in', ['N'])]}">
                                 <field name="concuren"/>
                             </page>
+                            <page string="Infos sur la soumission" attrs ="{'invisible':[('state', 'in', ['N'])]}">
+                                <field name="info"/>
+                            </page>
+
                         </notebook>
                     </sheet>
                 </form>
@@ -114,8 +120,7 @@
 
     <menuitem name="GESTION MARCHE" id="enregistre_appel"/>
     <menuitem name="Données de base" id="marche" parent="enregistre_appel" action="appel_action_view"/>
-    <menuitem name="Marchés" id="marche_m" parent="enregistre_appel" action="appel_action_view"/>
-    <menuitem name="Saisie/Mise à jour des marchés" id="marcheMise" parent="marche_m" action="appel_action_view"/>
+    <menuitem name="Saisie/Mise à jour des marchés" id="marcheMise" parent="marche" action="appel_action_view"/>
 
 
 </odoo>

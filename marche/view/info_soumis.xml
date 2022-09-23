@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <record model="ir.ui.view" id="InfoSoumis_tree_view">
+            <field name="name">Information sur la soumission</field>
+            <field name="model">info.soumis</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="date_depot"/>
+                    <field name="ordre_arrive"/>
+                </tree>
+            </field>
+    </record>
+
+    <record model="ir.ui.view" id="InfoSoumis_form_view">
+            <field name="name">Information sur la soumission</field>
+            <field name="model">info.soumis</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="date_depot"/>
+                            <field name="ordre_arrive"/>
+
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+    </record>
+
+
+
+
+    <record model="ir.actions.act_window" id="InfoSoumis_action_view">
+        <field name="name">Information sur la soumission</field>
+        <field name="res_model">info.soumis</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+
+
+
+</odoo>

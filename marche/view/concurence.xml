@@ -10,7 +10,8 @@
                     <field name="name"/>
                     <field name="dossier_concurent"/>
                     <field name="budget_concurent"/>
-                    <field name="rang"/>
+                    <field name="rang1"/>
+                    <field name="rang2"/>
                 </tree>
             </field>
     </record>
@@ -24,7 +25,8 @@
                 		<group>
 		                    <field name="name" style="width:50%"/>
 		                    <field name="budget_concurent" style="width:50%"/>
-                            <field name="rang"/>
+                            <field name="rang1"/>
+                            <field name="rang2"/>
 		                </group>
                         <group>
                             <field name="dossier_concurent"/>

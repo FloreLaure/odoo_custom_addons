@@ -16,10 +16,12 @@
         'view/structure.xml',
         'view/dossier.xml',
         'view/type_m.xml',
-        'view/listeSoumisLine.xml',
+        'view/listeMarchePerdu.xml',
         'view/ListeMarcheSoumis.xml',
         'view/listeObtenue.xml',
         'view/concurence.xml',
+        'view/info_soumis.xml',
+
 
     ],
     

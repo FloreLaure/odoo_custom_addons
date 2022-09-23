@@ -9,21 +9,25 @@ class appel(models.Model):
     _description = "Enregistrement des appels d'offre"
 
     name= fields.Text(string="Intitulé du marché", required ="True")
-    structure = fields.Many2one("marche.structure", string="Structure demandeuse", required =True)
+    structure = fields.Many2one("marche.structure", string="Structure demandeuse", required ="True")
     lieu = fields.Char(string="Lieu de dépot")
     date_parution = fields.Date(string="Date de parution")
-    date_depot = fields.Date(string="Date de dépot")
     date_limite = fields.Datetime(string="Date limite de dépot")
-    budget = fields.Integer(string="Budget")
-    num_quotidient = fields.Integer(string="Numero du quotidient")
-    page = fields.Integer(string="Page")
+    budget = fields.Char(string="Budget")
+    num_quotidient = fields.Char(string="Numero du quotidient")
+    page = fields.Char(string="Page")
     dure = fields.Char(string="Durée de la mission")
     typ = fields.Many2one("marche.type_m", string="Type du marché")
     num_appel = fields.Integer(string="Numéro d'appel d'offre")
-    fiche = fields.Binary(string="Quotidient", )
-    dossier = fields.Many2many("marche.dossier", string="Dossier à fournir", required =True)
+    fiche = fields.Binary(string="Quotidient")
+    dossier = fields.Many2many("marche.dossier", string="Dossier à fournir", required ="True")
     concuren=fields.One2many("marche.concurence", "resultats", string="Résultat")
-    state = fields.Selection([('N','Nouveau'),('S', 'Soumis'),('O','Obtenu'),('P', 'Perdu')], default="N", string="Etat")
+    state = fields.Selection([('N','Nouveau'),('S', 'En attente des resultats'),('O','Obtenu'),('P', 'Perdu')], default="N", string="Etat")
+    note = fields.Binary(string="Note de service")
+    periode = fields.Date(string="Période d'exécution")
+    orientation = fields.Text(string="Orientation de la mission")
+    info=fields.One2many("info.soumis", "infoS", string="Information sur la soumission")
+
 
 
     def action_soumis(self):
@@ -67,9 +71,10 @@ class concurence(models.Model):
 
     resultats = fields.Many2one("marche.appel")
     name=fields.Char(string="Nom du concurent")
-    dossier_concurent=fields.Text(string="Dossiers fournis par le concurent")
-    budget_concurent=fields.Integer(string="Budget proposé")
-    rang=fields.Integer(string="Rang")
+    dossier_concurent=fields.Many2many("marche.dossier",string="Dossiers fournis par le concurent")
+    budget_concurent=fields.Char(string="Budget proposé")
+    rang1=fields.Char(string="Rang preselection")
+    rang2=fields.Char(string="Rang definitif")
 
  
 ## classe pour l'enregistrement des types de marché ##
@@ -80,6 +85,15 @@ class type_m(models.Model):
 
     name = fields.Char(string="Type du marché", required =True)
     descriptions = fields.Text(string="Description du marché")
+
+
+class InfoSoumis(models.Model):
+    _name = "info.soumis"
+    _description = "Information sur le depot"
+
+    date_depot = fields.Date(string="Date de dépot")
+    ordre_arrive = fields.Integer(string="Ordre d'arrivée")
+    infoS = fields.Many2one("marche.appel")
 
 
 ## classes pour le resumé des marchés soumis pendant une periode donnée:dte_debut dte_fin ##
@@ -99,7 +113,7 @@ class ListeMarcheSoumis(models.TransientModel):
         fin = self.dte_fin
 
         for lis in self:
-            lis.env.cr.execute("""SELECT name, structure, typ, date_depot from marche_appel 
+            lis.env.cr.execute("""SELECT name, structure, typ, date_depot from marche_appel, info_soumis
                 where state = 'S' and date_depot between %s and %s """,(debut,fin)) 
             rows = lis.env.cr.dictfetchall()  
             result =[]
@@ -137,14 +151,14 @@ class ListeMarcheObtenue(models.TransientModel):
         fin = self.dte_fin
 
         for lis in self:
-            lis.env.cr.execute("""SELECT name, structure, typ, budget ,dure from marche_appel  
-                where state = 'O' """) 
+            lis.env.cr.execute("""SELECT name, structure, typ, budget, date_depot from marche_appel, info_soumis
+                where state = 'O' and date_depot between %s and %s """,(debut,fin))
             rows = lis.env.cr.dictfetchall()  
             result =[]
 
             lis.obtenue_ids.unlink()
             for line in rows:
-                result.append((0,0, {'structure_id' : line['structure'], 'intitule': line['name'], 'type_id': line['typ'], 'dure' : line['dure'], 'budget' : line['budget']}))
+                result.append((0,0, {'structure_id' : line['structure'], 'intitule': line['name'], 'type_id': line['typ'], 'dure' : line['dure'], 'budget' : line['budget'], 'dte_depot' : line['date_depot']}))
             self.obtenue_ids = result
 
 
@@ -155,10 +169,49 @@ class ListeMarcheObtenueLine(models.TransientModel):
     obtenue_id = fields.Many2one("liste.marche.obtenue", ondelete="cascade")
     structure_id = fields.Many2one("marche.structure", string="Structure")
     intitule = fields.Text(string="Intitulé")
-    budget = fields.Integer(string="Budget")
+    budget = fields.Char(string="Budget")
     dure = fields.Char(string="Durée")
     type_id = fields.Many2one("marche.type_m",string="Type de marché")
+    dte_depot = fields.Date(string="Date de dépôt")
 
 
 
+## classes pour le resumé des marchés obtenue pendant une periode donnée:dte_debut dte_fin ##
+
+
+class ListeMarchePerdu(models.TransientModel):
+    _name = "liste.marche.perdu"
+    _description = " marche perdu"
+
+    dte_debut = fields.Date(string="Date de début", required=True)
+    dte_fin = fields.Date(string="Date de fin", required=True)
+    perdu_ids = fields.One2many("liste.marche.perdu.line", "perdu_id",readonly=True)
+
+    def PerduListe(self):
+
+        debut = self.dte_debut
+        fin = self.dte_fin
+
+        for lis in self:
+            lis.env.cr.execute("""SELECT name, structure, typ, budget, date_depot from marche_appel, info_soumis
+                where state = 'P' and date_depot between %s and %s """,(debut,fin))
+            rows = lis.env.cr.dictfetchall()  
+            result =[]
+
+            lis.perdu_ids.unlink()
+            for line in rows:
+                result.append((0,0, {'structure_id' : line['structure'], 'intitule': line['name'], 'type_id': line['typ'], 'budget' : line['budget'], 'dte_depot' : line['date_depot']}))
+            self.perdu_ids = result
+
+
+class ListeMarchePerduLine(models.TransientModel):
+    _name = "liste.marche.perdu.line"
+    
+
+    perdu_id = fields.Many2one("liste.marche.perdu", ondelete="cascade")
+    structure_id = fields.Many2one("marche.structure", string="Structure")
+    intitule = fields.Text(string="Intitulé")
+    budget = fields.Char(string="Budget")
+    type_id = fields.Many2one("marche.type_m",string="Type de marché")
+    dte_depot = fields.Date(string="Date de dépôt")
 
